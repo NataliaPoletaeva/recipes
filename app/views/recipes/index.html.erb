@@ -1,11 +1,21 @@
 <h2>Recipes</h2>
-
-<div id="recipes">
-  <% @recipes.each do |recipe| %>
-    <%= link_to recipe, class:"link" do%>
-      <%= render partial: "shared/recipe_index", locals: {recipe: recipe} %>
+<%if request.fullpath == '/public_recipes'%>
+  <div>
+    <% @public_recipes.each do |recipe| %>
+      <%= link_to recipe, class:"link" do%>
+        <%= render partial: "shared/recipe_index", locals: {recipe: recipe} %>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<%else%>
+  <div>
+    <% @recipes.each do |recipe| %>
+      <%= link_to recipe, class:"link" do%>
+        <%= render partial: "shared/recipe_index", locals: {recipe: recipe} %>
+      <% end %>
+    <% end %>
+  </div>
+<%end%>
+
 
 <%= link_to "New recipe", new_recipe_path %>

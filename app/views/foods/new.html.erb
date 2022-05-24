@@ -1,0 +1,9 @@
+<div>
+  <h3> Add Food</h3>
+  <%= form_with url: foods_path, scope: :food do |form| %>
+    <%= form.text_field :name, placeholder: 'Please enter the food name', require: true %>
+    <%= form.text_field :measurement_unit, placeholder: 'Please enter the measuring unit', require: true %>
+    <%= form.number_field :price, placeholder: 'Please enter the price of the food', require: true %>
+    <%= form.submit "Submit" %>
+  <% end %>
+</div>

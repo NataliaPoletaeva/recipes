@@ -1,0 +1,9 @@
+<div class="container my-3 p-3 d-flex bg-dark text-light rounded-3 position-relative">
+    <div class="m-2 d-flex flex-column">
+        <h3><%= recipe.name%></h3>
+        <%= button_to "Remove", recipe_path(recipe.id), method: :delete, class:'btn btn-light link' %>
+    </div>
+    <div class="container d-flex justify-content-end align-items-center">
+        <p><%= recipe.description%></p>
+    </div>
+</div>

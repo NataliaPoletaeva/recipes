@@ -1,9 +1,6 @@
-<div>
-  <p>
-    <strong>Name:</strong>
-    <%= recipe.name %>
-  </p>
-
+<div>   
+<h2 class="text-center"><%= recipe.name %></h2>
+<div class="position-relative">
   <p>
     <strong>Preparation time:</strong>
     <%= recipe.preparation_time %>
@@ -19,9 +16,11 @@
     <%= recipe.description %>
   </p>
 
-  <p>
+  <p class="top-corner">
     <strong>Public:</strong>
     <%= recipe.public %>
   </p>
+</div>
+
 
 </div>

@@ -11,7 +11,7 @@ class RecipeFoodController < ApplicationController
   def new
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_food = RecipeFood.new
-    @foods = Food.all
+    @foods = Food.where(user_id: current_user.id)
   end
 
   def edit

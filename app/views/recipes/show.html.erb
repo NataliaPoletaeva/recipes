@@ -1,8 +1,11 @@
 <%= render partial: "shared/recipe", locals: {recipe: @recipe}%>
-<div class="d-flex justify-content-around">
-<%= button_to "Remove", recipe_path(@recipe.id), method: :delete, class:'btn btn-dark link' %>
-<%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class:'btn btn-dark link' %>
-</div>
+<hr>
+<%if @recipe.user == current_user%>
+    <div class="d-flex justify-content-around">
+    <%= button_to "Remove", recipe_path(@recipe.id), method: :delete, class:'btn btn-dark link' %>
+    <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class:'btn btn-dark link' %>
+    </div>
+<%end%>
 <hr>
 <div>
 <%if @ingredients.present?%>
@@ -21,10 +24,14 @@
             <td><%= ingredient.food.name%></td>
             <td><%= ingredient.quantity%></td>
             <td><%= ingredient.quantity * ingredient.food.price%></td>
-            <td class="d-flex justify-content-around">
-                <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), class: 'btn btn-dark' %>
-                <%= button_to "Remove", recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), method: :delete, class:'btn btn-dark' %>
-            </td>
+            <%if @recipe.user == current_user%>
+                <td class="d-flex justify-content-around">
+                    <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), class: 'btn btn-dark' %>
+                    <%= button_to "Remove", recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), method: :delete, class:'btn btn-dark' %>
+                </td>
+            <%else%>
+                <td><strong>NO action allowed</strong></td>
+            <%end%>
             </tr>
         <%end%>
     </tbody>

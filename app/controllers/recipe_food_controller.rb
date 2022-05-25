@@ -4,8 +4,10 @@ class RecipeFoodController < ApplicationController
 
   def index
   end
+
   def show
   end
+  
   def new
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_food = RecipeFood.new

@@ -1,6 +1,35 @@
 <%= render partial: "shared/recipe", locals: {recipe: @recipe}%>
 <div class="d-flex justify-content-around">
 <%= button_to "Remove", recipe_path(@recipe.id), method: :delete, class:'btn btn-dark link' %>
-<%= button_to "Remove", recipe_path(@recipe.id), method: :delete, class:'btn btn-dark link' %>
+<%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class:'btn btn-dark link' %>
 </div>
 <hr>
+<div>
+<%if @ingredients.present?%>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Value</th>
+        <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%@ingredients.each do |ingredient| %>
+            <tr>
+            <td><%= ingredient.food.name%></td>
+            <td><%= ingredient.quantity%></td>
+            <td><%= ingredient.quantity * ingredient.food.price%></td>
+            <td class="d-flex justify-content-around">
+                <%= link_to "Modify", edit_recipe_recipe_food_path(ingredient.id), class: 'btn btn-dark' %>
+                <%= button_to "Remove", recipe_recipe_food_path(ingredient.id), method: :delete, class:'btn btn-dark' %>
+            </td>
+            </tr>
+        <%end%>
+    </tbody>
+    </table>
+<%else%>
+    <p><strong>No ingredients added yet</strong></p>
+<%end%>
+</div>

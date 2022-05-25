@@ -22,8 +22,8 @@
             <td><%= ingredient.quantity%></td>
             <td><%= ingredient.quantity * ingredient.food.price%></td>
             <td class="d-flex justify-content-around">
-                <%= link_to "Modify", edit_recipe_recipe_food_path(ingredient.id), class: 'btn btn-dark' %>
-                <%= button_to "Remove", recipe_recipe_food_path(ingredient.id), method: :delete, class:'btn btn-dark' %>
+                <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), class: 'btn btn-dark' %>
+                <%= button_to "Remove", recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), method: :delete, class:'btn btn-dark' %>
             </td>
             </tr>
         <%end%>

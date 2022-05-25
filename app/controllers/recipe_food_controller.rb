@@ -15,7 +15,6 @@ class RecipeFoodController < ApplicationController
   end
 
   def edit
-    @recipe_food = RecipeFood.find(params[:id])
     @foods = Food.all
   end
 
@@ -36,7 +35,7 @@ class RecipeFoodController < ApplicationController
   def update
     respond_to do |format|
       if @recipe_food.update(recipe_food_params)
-        format.html { redirect_to recipe_path(@recipe), notice: 'Recipe food was successfully updated.' }
+        format.html { redirect_to recipe_path(params[:recipe_id]), notice: 'Recipe food was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -47,7 +46,7 @@ class RecipeFoodController < ApplicationController
     @recipe_food.destroy
 
     respond_to do |format|
-      format.html { redirect_to recipe_path(@recipe), notice: 'Recipe food was successfully destroyed.' }
+      format.html { redirect_to recipe_path(params[:recipe_id]), notice: 'Recipe food was successfully destroyed.' }
     end
   end
 

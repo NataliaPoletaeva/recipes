@@ -1,5 +1,5 @@
 <h2> Modify Ingredient</h2>
-    <%= form_with(model: @recipe_food, url: recipe_recipe_food_index_path) do |form| %>
+    <%= form_with(model: @recipe_food, url: recipe_recipe_food_path(recipe_id: @recipe_food.recipe_id, id: @recipe_food.id)) do |form| %>
         <% if @recipe_food.errors.any? %>
             <div style="color: red">
             <h2><%= pluralize(@recipe_food.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,8 +11,6 @@
             </ul>
             </div>
         <% end %>
-        <%= form.hidden_field :id, value: @recipe_food.id %>
-        <%= form.hidden_field :recipe_id, value: @recipe_food.recipe_id %>
         <%= form.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, { class: "mx-3"} %>
         <%= form.number_field :quantity, placeholder: 'Quantity', min: 0, required: true, class: "mx-3" %>
         <%= form.submit "Update ingredient", class: 'btn btn-dark' %>

@@ -12,5 +12,4 @@ FactoryBot.define do
     description { 'this is the best pizza ever' }
     public { true }
   end
-
 end

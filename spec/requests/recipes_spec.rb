@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Recipes", type: :request do
-  describe "GET /recipes" do
+RSpec.describe 'Recipes', type: :request do
+  describe 'GET /recipes' do
     before :each do
       get recipes_path
     end

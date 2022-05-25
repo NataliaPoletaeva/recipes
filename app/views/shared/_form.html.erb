@@ -18,12 +18,12 @@
 
   <div class='mb-3'>
     <%= form.label :preparation_time %>
-    <%= form.number_field :preparation_time, in: 0.0..24.0, placeholder: "preparation time", class: "form-control"  %>
+    <%= form.number_field :preparation_time, step: :any,  placeholder: "preparation time in hours  ex: 0.5", class: "form-control"  %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :cooking_time %>
-    <%= form.number_field :cooking_time, in: 0.0..24.0, placeholder: "cooking time", class: "form-control" %>
+    <%= form.number_field :cooking_time, step: :any,  placeholder: "cooking time in hours ex: 1 ", class: "form-control" %>
   </div>
 
   <div class='mb-3'>

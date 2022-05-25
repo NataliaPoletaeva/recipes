@@ -65,3 +65,15 @@ foods = [
 foods.each do |food|
     Food.create(name: food[:name], measurement_unit: food[:measurement_unit], price: food[:price], user_id: food[:user_id])
 end
+
+recipe_foods = [
+    {
+        :quantity => 10,
+        :food_id => 2,
+        :recipe_id => 2
+    }
+]
+
+recipe_foods.each do |recipe_food|
+    RecipeFood.create(quantity: recipe_food[:quantity], food_id: recipe_food[:food_id], recipe_id: recipe_food[:recipe_id])
+end

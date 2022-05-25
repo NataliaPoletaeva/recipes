@@ -1,0 +1,21 @@
+<% if @foods.present? %>
+    <%= form_with(model: recipe_food) do |form| %>
+    <% if recipe_food.errors.any? %>
+        <div style="color: red">
+        <h2><%= pluralize(recipe_food.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+            <% recipe_food.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+
+    <%= form.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, { class: "mb-3"} %>
+    <%= form.number_field :quantity, placeholder: 'Quantity', min: 0, required: true, class: "mb-3" %>
+    <%= form.submit "Add ingredient", class: 'btn btn-dark' %>
+    <% end %>
+<% else %>
+    <h3 class="font-bold mb-10">No food available for <%= current_user.name %> head over to <%= link_to "foods page", foods_path, class: 'underline' %> to add new food</h3>
+<% end %>

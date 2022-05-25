@@ -1,5 +1,6 @@
 class RecipeFoodController < ApplicationController
   before_action :set_recipe_food, only: %i[show edit update destroy]
+  before_action :authenticate_user!
 
   def index
     @recipe_foods = RecipeFood.all

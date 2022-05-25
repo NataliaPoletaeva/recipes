@@ -40,3 +40,28 @@ recipes.each do |recipe|
     Recipe.create(name: recipe[:name], preparation_time: recipe[:preparation_time],
          cooking_time: recipe[:cooking_time], public: recipe[:public], description: recipe[:description], user_id: recipe[:user_id])
 end
+
+foods = [
+    {
+        :name => 'Apple',
+        :measurement_unit => 'grams',
+        :price => 2,
+        :user_id => 1
+    },
+    {
+        :name => 'Rice',
+        :measurement_unit => 'grams',
+        :price => 10,
+        :user_id => 1
+    },
+        {
+        :name => 'oil',
+        :measurement_unit => 'litres',
+        :price => 5,
+        :user_id => 1
+    }
+]
+
+foods.each do |food|
+    Food.create(name: food[:name], measurement_unit: food[:measurement_unit], price: food[:price], user_id: food[:user_id])
+end

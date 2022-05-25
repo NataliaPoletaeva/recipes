@@ -1,4 +1,6 @@
 class FoodsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @foods = Food.all
   end
@@ -14,6 +16,13 @@ class FoodsController < ApplicationController
     else
       redirect_to new_food_path, flash: { alert: 'Could not save your food' }
     end
+  end
+
+  def destroy
+    @food = Food.find(params[:id])
+    @food.destroy!
+    flash[:notice] = 'You have deleted the food!'
+    redirect_to foods_path
   end
 
   private

@@ -1,0 +1,6 @@
+<%= render partial: "shared/recipe", locals: {recipe: @recipe}%>
+<div class="d-flex justify-content-around">
+<%= button_to "Remove", recipe_path(@recipe.id), method: :delete, class:'btn btn-dark link' %>
+<%= button_to "Remove", recipe_path(@recipe.id), method: :delete, class:'btn btn-dark link' %>
+</div>
+<hr>

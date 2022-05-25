@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :foods
   validates_associated :recipes
   validates :name, presence: true
-  
+
   def admin?(requested_role)
     role == requested_role.to_s
   end

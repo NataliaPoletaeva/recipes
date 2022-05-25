@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show destroy]
+  before_action :set_recipe, only: %i[show update destroy]
 
   # GET /recipes or /recipes.json
   def index
@@ -29,6 +29,12 @@ class RecipesController < ApplicationController
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # PATCH /recipes/:id
+  def update
+    @recipe.update(public: !@recipe.public)
+    redirect_to recipe_path(@recipe.id), notice: "The recipe is now #{@recipe.public ? 'public' : 'private'}!"
   end
 
   # DELETE /recipes/1 or /recipes/1.json

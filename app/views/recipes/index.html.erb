@@ -12,6 +12,7 @@
   <h2 class="mx-3">Recipes</h2>
   <%= link_to "New recipe", new_recipe_path, class: 'btn btn-dark' %>
   </div>
+  <%if @recipes.present?%>
     <div>
       <% @recipes.each do |recipe| %>
         <%= link_to recipe, class:"link" do%>
@@ -19,6 +20,9 @@
         <% end %>
       <% end %>
     </div>
+  <%else%>
+    <p><strong>No recipes added yet</strong></p>
+  <%end%>
 <%end%>
 
 

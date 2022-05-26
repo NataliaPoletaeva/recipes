@@ -2,12 +2,10 @@ class RecipeFoodController < ApplicationController
   before_action :set_recipe_food, only: %i[edit update destroy]
   before_action :authenticate_user!
 
-  def index
-  end
+  def index; end
 
-  def show
-  end
-  
+  def show; end
+
   def new
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_food = RecipeFood.new

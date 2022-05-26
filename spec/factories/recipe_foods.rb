@@ -5,7 +5,7 @@ FactoryBot.define do
     food_id { 1 }
   end
   factory :food do
-    user_id { 1}
+    user_id { 1 }
     name { 'rice' }
     measurement_unit { 'gram' }
     price { 1 }

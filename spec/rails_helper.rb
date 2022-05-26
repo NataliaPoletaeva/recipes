@@ -67,8 +67,8 @@ RSpec.configure do |config|
   # Include the Devise helpers for login, etc
   config.include Warden::Test::Helpers
   #  include shoulda for model associations testing
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |confige|
+    confige.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end

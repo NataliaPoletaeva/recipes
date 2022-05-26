@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe RecipeFood, type: :model do
   before :each do
-      current_user = create(:user)
-      recipe = create(:recipe, :user => current_user)
-      food = create(:food, :user => current_user)
-      @recipe_food = create(:recipe_food, :recipe => recipe, :food => food)
+    current_user = create(:user)
+    recipe = create(:recipe, user: current_user)
+    food = create(:food, user: current_user)
+    @recipe_food = create(:recipe_food, recipe:, food:)
   end
   it 'is valid with valid attributes' do
     expect(@recipe_food).to be_valid

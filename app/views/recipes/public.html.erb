@@ -1,0 +1,12 @@
+  <h2 class="mx-3"> Public Recipes</h2>
+  <%if @public_recipes.present?%>
+    <div>
+      <% @public_recipes.each do |recipe| %>
+        <%= link_to recipe, class:"link" do%>
+          <%= render partial: "shared/recipe_index", locals: {recipe: recipe} %>
+        <% end %>
+      <% end %>
+    </div>
+  <%else%>
+    <p>No public recipes yet</p>
+  <%end%>

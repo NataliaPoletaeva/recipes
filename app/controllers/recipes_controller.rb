@@ -1,14 +1,17 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show update destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:public, :show]
 
-  # GET /recipes or /recipes.json
+  # GET /recipes
   def index
     @recipes = current_user.recipes.all
+  end
+  
+  def public
     @public_recipes = Recipe.where(public: true)
   end
 
-  # GET /recipes/1 or /recipes/1.json
+  # GET /recipes/1
   def show
     @recipe = Recipe.find(params[:id])
     @ingredients = RecipeFood.where(recipe_id: params[:id]).includes(:food)
@@ -19,7 +22,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
   end
 
-  # POST /recipes or /recipes.json
+  # POST /recipes
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user

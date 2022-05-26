@@ -2,10 +2,10 @@ class InventoryFoodsController < ApplicationController
   before_action :set_inventory_food, only: %i[show destroy]
   before_action :authenticate_user!
 
-  # GET /inventory_foods or /inventory_foods.json
+  # GET /inventory_foods
   def index; end
 
-  # GET /inventory_foods/1 or /inventory_foods/1.json
+  # GET /inventory_foods/1
   def show; end
 
   # GET /inventory_foods/new
@@ -15,7 +15,7 @@ class InventoryFoodsController < ApplicationController
     @foods = Food.where(user_id: current_user.id)
   end
 
-  # POST /inventory_foods or /inventory_foods.json
+  # POST /inventory_foods
   def create
     @inventory = Inventory.find(params[:inventory_id])
     @inventory_food = InventoryFood.new(inventory_food_params)
@@ -30,7 +30,7 @@ class InventoryFoodsController < ApplicationController
     end
   end
 
-  # DELETE /inventory_foods/1 or /inventory_foods/1.json
+  # DELETE /inventory_foods/1
   def destroy
     @inventory_food.destroy
 

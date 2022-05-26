@@ -1,14 +1,14 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show update destroy]
-  before_action :authenticate_user!, except: [:public, :show]
+  before_action :authenticate_user!, except: %i[public show]
 
   # GET /recipes
   def index
     @recipes = current_user.recipes.all
   end
-  
+
   def public
-    @public_recipes = Recipe.where(public: true)
+    @public_recipes = Recipe.where(public: true).includes(:recipe_foods)
   end
 
   # GET /recipes/1

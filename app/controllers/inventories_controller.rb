@@ -2,12 +2,12 @@ class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
-  # GET /inventories or /inventories.json
+  # GET /inventories
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.where(user_id: current_user.id)
   end
 
-  # GET /inventories/1 or /inventories/1.json
+  # GET /inventories/1
   def show
     @inventory = Inventory.find(params[:id])
     @foods = InventoryFood.where(inventory_id: params[:id]).includes(:food)
@@ -21,7 +21,7 @@ class InventoriesController < ApplicationController
   # GET /inventories/1/edit
   def edit; end
 
-  # POST /inventories or /inventories.json
+  # POST /inventories
   def create
     @inventory = current_user.inventories.new(inventory_params)
 
@@ -34,7 +34,7 @@ class InventoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /inventories/1 or /inventories/1.json
+  # PATCH/PUT /inventories/1
   def update
     respond_to do |format|
       if @inventory.update(inventory_params)
@@ -45,7 +45,7 @@ class InventoriesController < ApplicationController
     end
   end
 
-  # DELETE /inventories/1 or /inventories/1.json
+  # DELETE /inventories/1
   def destroy
     @inventory.destroy
 

@@ -4,7 +4,7 @@ RSpec.describe 'Recipes', type: :request do
   describe 'GET /recipes' do
     before :each do
       current_user = create(:user)
-      create(:recipe, :user => current_user)
+      create(:recipe, user: current_user)
       login_as(current_user)
       get recipes_path
     end
@@ -27,7 +27,7 @@ RSpec.describe 'Recipes', type: :request do
   describe 'GET /recipes/:id' do
     before :each do
       current_user = create(:user)
-      recipe = FactoryBot.create(:recipe, :user => current_user)
+      recipe = FactoryBot.create(:recipe, user: current_user)
       login_as(current_user)
       get recipe_path(id: recipe.id)
     end

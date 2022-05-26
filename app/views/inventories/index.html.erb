@@ -7,17 +7,20 @@
         <h3 class="text-center">No inventories yet.</h3>
       </div>
     <% else %>
+    <div class="inventory-card">
       <% @inventories.each do |inventory| %>
-        <div class="d-flex justify-content-center align-items-baseline gap-5 bg-light border w-75 m-auto p-3 my-3">
-          <div class="d-flex flex-column align-items-center flex-grow-1">
+        <div class="inventory-box">
+          <div class="d-flex flex-column align-items-center flex-grow-1 gap-3">
             <h3 class="text-center"><%= link_to inventory.name, inventory_path(id: inventory.id), class: "text-dark" %></h3>
             <%= button_to "Remove", inventory, method: :delete, class:'btn btn-dark link' %>
           </div>
-          <div class="flex-grow-1" style="max-height: 200px; overflow: auto">
+          <div class="flex-grow-1">
             <p><%= inventory.description %></p>
           </div>
         </div>
+        
       <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>

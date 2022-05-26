@@ -18,9 +18,11 @@
 
   <div class="top-corner">
     <p>
-      This recipe is <strong><%= @recipe.public ? 'public' : 'Private' %></strong>
+      This recipe is <strong><%= recipe.public ? 'public' : 'Private' %></strong>
     </p>
-    <%= button_to "Make it #{@recipe.public ? 'private' : 'public'}", recipe_path(@recipe.id), class: 'bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded', method: :patch, class: 'btn btn-dark link' %>
+    <%if recipe.user == current_user%>
+      <%= button_to "Make it #{recipe.public ? 'private' : 'public'}", recipe_path(recipe.id), class: 'bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded', method: :patch, class: 'btn btn-dark link' %>
+    <%end%>
   </div>
 </div>
 

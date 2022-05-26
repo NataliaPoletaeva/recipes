@@ -1,0 +1,36 @@
+<%= render @inventory %>
+
+<div class="d-flex justify-content-end">
+  <%= link_to "Add Food", new_inventory_inventory_food_path(@inventory),  class:'btn btn-dark link' %>
+</div>
+
+<div class= "mt-4">
+<%if @foods.present?%>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%@foods.each do |foodie| %>
+            <tr>
+            <td><%= foodie.food.name%></td>
+            <td><%= foodie.quantity%></td>
+            <%if @inventory.user == current_user%>
+                <td class="d-flex justify-content-around">
+                    <%= button_to "Remove", inventory_inventory_food_path(inventory_id: foodie.inventory_id, id: foodie.id), method: :delete, class:'btn btn-dark' %>
+                </td>
+            <%else%>
+                <td><strong>NO action allowed</strong></td>
+            <%end%>
+            </tr>
+        <%end%>
+    </tbody>
+    </table>
+<%else%>
+    <p><strong>No foods added yet</strong></p>
+<%end%>
+</div>

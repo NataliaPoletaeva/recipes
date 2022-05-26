@@ -1,5 +1,6 @@
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /inventories or /inventories.json
   def index
@@ -8,6 +9,8 @@ class InventoriesController < ApplicationController
 
   # GET /inventories/1 or /inventories/1.json
   def show
+    @inventory = Inventory.find(params[:id])
+    @foods = InventoryFood.where(inventory_id: params[:id]).includes(:food)
   end
 
   # GET /inventories/new
@@ -26,10 +29,8 @@ class InventoriesController < ApplicationController
     respond_to do |format|
       if @inventory.save
         format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully created." }
-        format.json { render :show, status: :created, location: @inventory }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -39,10 +40,8 @@ class InventoriesController < ApplicationController
     respond_to do |format|
       if @inventory.update(inventory_params)
         format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully updated." }
-        format.json { render :show, status: :ok, location: @inventory }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,7 +52,6 @@ class InventoriesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to inventories_url, notice: "Inventory was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

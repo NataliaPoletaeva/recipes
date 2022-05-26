@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :inventory_foods
-  resources :inventories
+  
+  resources :inventories do
+    resources :inventory_foods
+  end
   devise_for :users
   resources :recipes, only: [:index, :show, :create, :new, :update, :destroy] do
     patch '/recipe_food/:id', to: 'recipe_food#update'

@@ -1,9 +1,9 @@
 class InventoryFoodsController < ApplicationController
-  before_action :set_inventory_food, only: %i[ show edit update destroy ]
+  before_action :set_inventory_food, only: %i[ show destroy ]
+  before_action :authenticate_user!
 
   # GET /inventory_foods or /inventory_foods.json
   def index
-    @inventory_foods = InventoryFood.all
   end
 
   # GET /inventory_foods/1 or /inventory_foods/1.json
@@ -12,38 +12,23 @@ class InventoryFoodsController < ApplicationController
 
   # GET /inventory_foods/new
   def new
+    
+    @inventory = Inventory.find(params[:inventory_id])
     @inventory_food = InventoryFood.new
-  end
-
-  # GET /inventory_foods/1/edit
-  def edit
+    @foods = Food.where(user_id: current_user.id)
   end
 
   # POST /inventory_foods or /inventory_foods.json
   def create
-    @inventory_food = InventoryFood.new(food_id: params[:food][:food_id], inventory_id: params[:inventory_id],
-    quantity: params[:quantity])
+    @inventory = Inventory.find(params[:inventory_id])
+    @inventory_food = InventoryFood.new(inventory_food_params)
+    @inventory_food.inventory_id = @inventory.id
 
     respond_to do |format|
       if @inventory_food.save
-        format.html { redirect_to inventory_food_url(@inventory_food), notice: "Inventory food was successfully created." }
-        format.json { render :show, status: :created, location: @inventory_food }
+        format.html { redirect_to inventory_path(@inventory), notice: "Inventory food was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @inventory_food.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /inventory_foods/1 or /inventory_foods/1.json
-  def update
-    respond_to do |format|
-      if @inventory_food.update(inventory_food_params)
-        format.html { redirect_to inventory_food_url(@inventory_food), notice: "Inventory food was successfully updated." }
-        format.json { render :show, status: :ok, location: @inventory_food }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @inventory_food.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,8 +38,7 @@ class InventoryFoodsController < ApplicationController
     @inventory_food.destroy
 
     respond_to do |format|
-      format.html { redirect_to inventory_foods_url, notice: "Inventory food was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to inventory_path(params[:inventory_id]), notice: "Inventory food was successfully destroyed." }
     end
   end
 
@@ -66,6 +50,6 @@ class InventoryFoodsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def inventory_food_params
-      params.require(:inventory_food).permit(:quantity, :inventory_id, :food_id)
+      params.require(:inventory_food).permit(:quantity, :food_id)
     end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe '/foods', type: :request do
   let(:test_user) { create :user }
-  before { sign_in test_user }
+  before { login_as test_user }
   let(:valid_attributes) { { name: 'name', measurement_unit: 'grams', price: 27.99, user: test_user } }
 
   let(:invalid_attributes) { { name: 'name', price: 27.99, user: test_user } }
@@ -10,8 +10,8 @@ RSpec.describe '/foods', type: :request do
   describe 'GET /index' do
     it 'renders a successful response' do
       Food.create! valid_attributes
-      get foods_url
-      expect(response).to be_successful
+      get foods_path
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -41,11 +41,6 @@ RSpec.describe '/foods', type: :request do
         expect do
           post foods_url, params: { food: invalid_attributes }
         end.to change(Food, :count).by(0)
-      end
-
-      it 'has http status of an unprocessable_entity' do
-        post foods_url, params: { food: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

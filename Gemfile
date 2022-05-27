@@ -46,6 +46,8 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 
 gem 'devise'
 
+gem 'cancancan', '~> 3.3'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

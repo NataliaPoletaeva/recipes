@@ -1,0 +1,28 @@
+  <h2 class="mx-3"> Public Recipes</h2>
+  <%if @public_recipes.present?%>
+    <div>
+      <% @public_recipes.each do |recipe| %>
+        <%= link_to recipe, class:"link" do%>
+            <div class="container my-3 p-3 d-flex bg-dark text-light rounded-3 position-relative">
+                <div class="m-2 d-flex flex-column">
+                    <h3><%= recipe.name%></h3>
+                    <p>By <%=recipe.user.name%></p>
+                    <%if recipe.user == current_user%>
+                        <%= button_to "Remove", recipe_path(recipe.id), method: :delete, class:'btn btn-light link' %>
+                    <%end%>
+                </div>
+                <div class="container d-flex flex-column justify-content-center align-items-end">
+                    <p>Total food items: <%= recipe.recipe_foods.count%></p>
+                    <% recipe.recipe_foods.each do |foodie|%>
+                        <%@cost = 0 %>
+                        <%@cost += foodie.quantity * foodie.food.price%>
+                        <p>Total price: $ <%= @cost%></p>
+                    <%end%>
+                </div>
+            </div>
+        <% end %>
+      <% end %>
+    </div>
+  <%else%>
+    <p>No public recipes yet</p>
+  <%end%>

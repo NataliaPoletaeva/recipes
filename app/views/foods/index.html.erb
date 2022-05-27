@@ -18,13 +18,14 @@
       <td><%=food.name%></td>
       <td><%=food.measurement_unit%></td>
       <td><%=food.price%></td>
-      <td>     
+      <td>
+      <% if can? :destroy, food %>
         <%=button_to "Delete food", "/foods/#{food.id}", 
         :method=>:delete,:class=>'btn btn-danger',:data=>{turbo:false} %>
+      <% end %>
       </td>
     </tr>
     <% end %>
   </tbody>
  </table>
- 
 </div>

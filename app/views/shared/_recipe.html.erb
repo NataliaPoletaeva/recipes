@@ -1,0 +1,29 @@
+<div>   
+<h2 class="text-center"><%= recipe.name %></h2>
+<div class="position-relative">
+  <p>
+    <strong>Preparation time:</strong>
+    <%= recipe.preparation_time %>
+  </p>
+
+  <p>
+    <strong>Cooking time:</strong>
+    <%= recipe.cooking_time %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= recipe.description %>
+  </p>
+
+  <div class="top-corner">
+    <p>
+      This recipe is <strong><%= recipe.public ? 'public' : 'Private' %></strong>
+    </p>
+    <%if recipe.user == current_user%>
+      <%= button_to "Make it #{recipe.public ? 'private' : 'public'}", recipe_path(recipe.id), method: :patch, class: 'btn btn-dark link' %>
+    <%end%>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,8 @@
+<h2 class="text-center">Generating shopping list</h2>
+<h3>Choose an inventory to use</h3>
+<div class="container">
+    <%= form_with url: recipe_shopping_list_path(params[:recipe_id]), method: :post do |form| %>
+        <%= form.select :inventory_id, inventories.map { |inv| [inv.name, inv.id] }, {}, { class: "m-3 w-25"} %>
+        <%= form.submit "Generate", class:"btn btn-dark" %>
+    <% end %>
+</div>

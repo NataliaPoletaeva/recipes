@@ -1,0 +1,24 @@
+.link {
+  text-decoration: none;
+}
+
+.top-corner {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  padding: 5px;
+}
+
+.inventory-box {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  margin: 20px 0;
+  box-shadow: inset 0 0 0 1px #ddd;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.inventory-box a {
+  text-decoration: none;
+}

@@ -1,0 +1,42 @@
+<%= render partial: "shared/recipe", locals: {recipe: @recipe}%>
+<hr>
+<%if @recipe.user == current_user%>
+    <div class="d-flex justify-content-around">
+    <%= link_to 'Generate shopping list', recipe_choose_inventory_path(params[:id]) , class:'btn btn-dark link' %>
+    <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class:'btn btn-dark link' %>
+    </div>
+<%end%>
+<hr>
+<div>
+<%if @ingredients.present?%>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Value</th>
+        <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%@ingredients.each do |ingredient| %>
+            <tr>
+            <td><%= ingredient.food.name%></td>
+            <td><%= ingredient.quantity%></td>
+            <td> $ <%= ingredient.quantity * ingredient.food.price%></td>
+            <%if @recipe.user == current_user%>
+                <td class="d-flex justify-content-around">
+                    <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), class: 'btn btn-dark' %>
+                    <%= button_to "Remove", recipe_recipe_food_path(recipe_id: ingredient.recipe_id, id: ingredient.id), method: :delete, class:'btn btn-dark' %>
+                </td>
+            <%else%>
+                <td><strong>NO action allowed</strong></td>
+            <%end%>
+            </tr>
+        <%end%>
+    </tbody>
+    </table>
+<%else%>
+    <p><strong>No ingredients added yet</strong></p>
+<%end%>
+</div>

@@ -1,0 +1,38 @@
+<%unless @shopping_list.empty?%>
+    <h2 class='text-center'>Shopping list</h2>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+            <p>Amount of food to buy: <%=@recipe_foods_not_in_inventory.count%> </p>
+            <p>Total value of food needed: $ <%=@cost%> </p>
+        </div>
+        <div class="d-flex flex-column">
+            <p>Recipe: <%= link_to @recipe.name, recipe_path(@recipe.id)%> </p>
+            <p>Inventory: <%= link_to @inventory.name, inventory_path(@inventory.id)%> </p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Food</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%@shopping_list.each do |food| %>
+                <tr>
+                <td><%= food.name%></td>
+                <td><%= food.quantity%></td>
+                <td>$ <%= food.quantity * food.price%></td>
+                </tr>
+            <%end%>
+        </tbody>
+        </table>
+    </div>
+<%else%>
+    <p><strong>Nothing to buy! Everything is in the inventory.</strong></p>
+<%end%>

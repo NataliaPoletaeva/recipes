@@ -1,17 +1,7 @@
-<%if request.fullpath == '/public_recipes'%>
-  <h2 class="mx-3"> Public Recipes</h2>
-    <div>
-      <% @public_recipes.each do |recipe| %>
-        <%= link_to recipe, class:"link" do%>
-          <%= render partial: "shared/recipe_index", locals: {recipe: recipe} %>
-        <% end %>
-      <% end %>
-    </div>
-<%else%>
-  <div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between">
   <h2 class="mx-3">Recipes</h2>
   <%= link_to "New recipe", new_recipe_path, class: 'btn btn-dark' %>
-  </div>
+</div>
   <%if @recipes.present?%>
     <div>
       <% @recipes.each do |recipe| %>
@@ -23,7 +13,3 @@
   <%else%>
     <p><strong>No recipes added yet</strong></p>
   <%end%>
-<%end%>
-
-
-

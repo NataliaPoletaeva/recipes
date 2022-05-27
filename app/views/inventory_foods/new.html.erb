@@ -12,7 +12,7 @@
         </div>
     <% end %>
 
-    <%= form.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, { class: "m-3"} %>
+    <%= form.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, { class: "m-3 w-25"} %>
     <%= form.number_field :quantity, placeholder: 'Quantity', min: 0, required: true, class: "m-3" %>
     <%= form.submit "Add Food", class: 'btn btn-dark' %>
     <% end %>
